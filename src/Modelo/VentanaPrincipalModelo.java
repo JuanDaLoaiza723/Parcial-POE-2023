@@ -14,5 +14,207 @@ package Modelo;
 */
 
 public class VentanaPrincipalModelo {
-
+    
+    java.util.List<Venta> misVentas = new java.util.ArrayList<>();
+    java.util.List<Venta> ventasPronosticadas = new java.util.ArrayList<>();
+    
+    int selectedAnio = -1;
+    
+    double a;
+    double b;
+    double c;
+    int sumatoriaX;
+    double sumatoriaY;
+    int sumatoriaX2;
+    double sumatoriaY2;
+    double sumatoriaXY;
+    double n; // Numero de años
+    
+    public VentanaPrincipalModelo(){
+    }
+    
+    
+    //              SISTEMA                //
+    public void setSelectedAnio(int anio){
+        selectedAnio = anio;
+    }
+    
+    
+    //              AGREGAR, MODIFICAR Y ELIMINAR               //
+    public void agregarAnio(double cantidadVentas){
+        misVentas.add(new Venta(misVentas.size()+1, cantidadVentas));
+    }
+    
+    public void modificarAnio(double cantidadVentas){
+        for (Venta ventaActual : misVentas) {
+            if (ventaActual.getX() == selectedAnio) {
+                ventaActual.setY(cantidadVentas);
+                break;
+            }
+        }
+    }
+    
+    public void eliminarAnio(){
+        
+        for(Venta ventaActual: misVentas){
+            if(ventaActual.getX() == selectedAnio){
+                misVentas.remove(ventaActual);
+                break;
+            }
+        }
+        
+        for (int i = selectedAnio - 1; i < misVentas.size() - selectedAnio; i++) {
+            misVentas.get(i).setX(misVentas.get(i).getX() - 1);
+        }
+    }
+    
+    public void eliminarTodo(){
+        misVentas.clear();
+    }
+    
+    
+    //              FUNCIONES AUXILIARES                //
+    public int getCantidadMisVentas(){
+        return misVentas.size();
+    }
+        
+    public boolean existeAnio(int anio){
+        
+        boolean respuesta = false;
+        
+        for(Venta ventaActual: misVentas){
+            if(ventaActual.getX() == anio){
+                respuesta = true;
+                break;
+            }
+        }
+        
+        return respuesta;
+    }
+    
+    
+    //              GETTERS               //
+    // MIS VENTAS
+    public int getMiX(int indice){
+        return misVentas.get(indice).getX();
+    }
+    
+    public double getMiY(int indice){
+        return misVentas.get(indice).getY();
+    }
+    
+    public int getMiX2(int indice){
+        return misVentas.get(indice).getX2();
+    }
+    
+    public double getMiY2(int indice){
+        return misVentas.get(indice).getY2();
+    }
+    
+    public double getMiXY(int indice){
+        return misVentas.get(indice).getXY();
+    }
+    
+    // PRONOSTICADAS
+    
+    
+    //              CALCULOS DE ARRAY COMPLETO              //
+    // CALCULOS ATAJO
+    public void calcularTodo(){
+        calcularSumatorias();
+        calcularABC();
+    }
+    
+    public void calcularABC(){
+        calcularB();
+        calcularA();
+        calcularC();
+    }
+    
+    public void calcularSumatorias(){
+        calcularSumatoriaX();
+        calcularSumatoriaY();
+        calcularSumatoriaX2();
+        calcularSumatoriaY2();
+        calcularSumatoriaXY();
+    }
+    
+    // CALCULOS INDIVIDUALES
+    public void calcularSumatoriaX(){
+        
+        int acumulador = 0;
+        
+        for(Venta ventaActual: misVentas){
+            acumulador += ventaActual.getX();
+        }
+        sumatoriaX = acumulador;
+    }
+    
+    public void calcularSumatoriaY(){
+        
+        double acumulador = 0;
+        
+        for(Venta ventaActual: misVentas){
+            acumulador += ventaActual.getY();
+        }
+        sumatoriaY = acumulador;
+    }
+    
+    public void calcularSumatoriaX2(){
+        
+        int acumulador = 0;
+        
+        for(Venta ventaActual: misVentas){
+            ventaActual.calcularTodo();
+            acumulador += ventaActual.getX2();
+        }
+        
+        sumatoriaX2 = acumulador;
+    }
+    
+    public void calcularSumatoriaY2(){
+        
+        double acumulador = 0;
+        
+        for(Venta ventaActual: misVentas){
+            ventaActual.calcularTodo();
+            acumulador += ventaActual.getY2();
+        }
+        
+        sumatoriaY2 = acumulador;
+    }
+    
+    public void calcularSumatoriaXY(){
+        
+        double acumulador = 0;
+        
+        for(Venta ventaActual: misVentas){
+            ventaActual.calcularTodo();
+            acumulador += ventaActual.getXY();
+        }
+        
+        sumatoriaXY = acumulador;
+    }
+    
+    public void calcularA(){
+        double numerador = sumatoriaY - (b * sumatoriaX);
+        double denominador = n;
+        a = Math.round(numerador / denominador * 100.0) / 100.0;
+    }
+    
+    public void calcularB(){
+        
+        double numerador = (n * sumatoriaXY) - (sumatoriaX * sumatoriaY);
+        double denominador = (n * sumatoriaX2 ) - (sumatoriaX * sumatoriaX);
+        
+        b = Math.round(numerador/denominador * 100.0) / 100.0;
+    }
+    
+    public void calcularC(){
+        
+        double numerador = b*n;
+        double denominador = sumatoriaY;
+        
+        c = Math.round(numerador/denominador * 100.0) / 100.0;
+    }
 }
