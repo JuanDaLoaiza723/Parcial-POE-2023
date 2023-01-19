@@ -13,6 +13,19 @@ package Controlador;
  * 
 */
 
+import Vista.*;
+import Modelo.*;
+
 public class VentanaPrincipalControlador {
+    protected VentanaPrincipalModelo modelo = new VentanaPrincipalModelo();
+    protected VentanaPrincipalVista vista = new VentanaPrincipalVista();
+    
+    public VentanaPrincipalControlador(VentanaPrincipalModelo modelo, VentanaPrincipalVista vista){
+        this.vista = vista;
+        this.modelo = modelo;
+        vista.setVisible(true);
+        vista.setLocationRelativeTo(null);
+        vista.setResizable(false);
+    }
 
 }

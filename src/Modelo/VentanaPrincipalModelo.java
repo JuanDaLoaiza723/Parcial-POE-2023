@@ -13,6 +13,13 @@ package Modelo;
  * 
 */
 
-public class VentanaPrincipalModelo {
+import Vista.*;
+import Controlador.*;
 
+public class VentanaPrincipalModelo {
+    
+    public VentanaPrincipalModelo(){
+        
+    }
+    
 }

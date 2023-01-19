@@ -13,6 +13,15 @@ package Main;
  * 
 */
 
-public class main {
+import Vista.*;
+import Modelo.*;
+import Controlador.*;
 
+public class main {
+    public static void main(String[] args) {
+        VentanaPrincipalVista vista = new VentanaPrincipalVista();
+        VentanaPrincipalModelo modelo = new VentanaPrincipalModelo();
+        VentanaPrincipalControlador controlador = new VentanaPrincipalControlador(modelo,vista);
+    }
+  
 }
