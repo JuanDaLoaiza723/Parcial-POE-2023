@@ -469,6 +469,14 @@ public class VentanaPrincipalVista extends javax.swing.JFrame {
         txtF_cantidadVentas.setText("");
     }
     
+    public void limpiarCamposSumatoria(){
+        setXVenta("");
+        setYVenta("");
+        setX2Venta("");
+        setY2Venta("");
+        setXYVenta("");
+    }
+    
     //              HABILITAR/DESHABILITAR BOTONES          //
     
     /**
@@ -581,6 +589,10 @@ public class VentanaPrincipalVista extends javax.swing.JFrame {
     
     public void addActionAñosPronostico(KeyListener listener){
       txtF_cantidadAños.addKeyListener(listener);
+    }
+    
+    public void addActionCantidadDeVentas(KeyListener listener){
+        txtF_cantidadVentas.addKeyListener(listener);
     }
     
     

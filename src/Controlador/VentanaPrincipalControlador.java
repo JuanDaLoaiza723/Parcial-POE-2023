@@ -22,11 +22,9 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import java.lang.NumberFormatException;
-import java.util.ConcurrentModificationException;
-import java.util.HashSet;
+import javax.swing.JOptionPane;
 
 public class VentanaPrincipalControlador {
     
@@ -53,8 +51,9 @@ public class VentanaPrincipalControlador {
         vista.addActionNuevoPronostico(oyenteNuevoPronostico);
         vista.addActionTable1(oyenteFila);
         vista.addActionAñosPronostico(keyguardPronostico);
+        vista.addActionCantidadDeVentas(keyguardVenta);
         
-        vista.setCantidadAños("2");
+        vista.setCantidadAños("5");
     }
     
     public void cargarTabla1(){
@@ -82,6 +81,7 @@ public class VentanaPrincipalControlador {
                 
             if(cantidadAños <= 2)
                 cantidadAños = 2;
+            
             modelo.setAniosPronostico(cantidadAños);
             
             for(int i = cantidadVentas+1; i <= cantidadVentas + cantidadAños; i++){
@@ -93,7 +93,6 @@ public class VentanaPrincipalControlador {
                 
                 vista.nuevaFilaPronostico(i, y);
                 
-                cargarSumatorias();
                 cargarPorcentaje();
             }
         }
@@ -101,11 +100,20 @@ public class VentanaPrincipalControlador {
     
     public void cargarSumatorias() {
         // Sumatorias
-        int sumx = modelo.getSumatoriaX();
-        double sumy = modelo.getSumatoriaY();
-        int sumx2 = modelo.getSumatoriaX2();
-        double sumy2 = modelo.getSumatoriaY2();
-        double sumxy = modelo.getSumatoriaXY();
+        if(!(modelo.getCantidadMisVentas() >= 1)){
+            vista.limpiarCamposSumatoria();
+        }
+        String sumx = Integer.toString(modelo.getSumatoriaX());
+        String sumy = Double.toString(modelo.getSumatoriaY());
+        String sumx2 = Integer.toString(modelo.getSumatoriaX2());
+        String sumy2 = Double.toString(modelo.getSumatoriaY2());
+        String sumxy = Double.toString(modelo.getSumatoriaXY());
+        
+        vista.setXVenta(sumx);
+        vista.setYVenta(sumy);
+        vista.setX2Venta(sumx2);
+        vista.setY2Venta(sumy2);
+        vista.setXYVenta(sumxy);
     }
     
     public void cargarPorcentaje(){
@@ -116,8 +124,19 @@ public class VentanaPrincipalControlador {
         
     public void recargarTodo(){
         cargarTabla1();
+        cargarSumatorias();
         cargarTabla2();
         vista.limpiarCampos();
+    }
+    
+    public void actualizarCantidadDeAños(){
+        try{
+                cantidadAños = Integer.parseInt(vista.getCantidadAños());
+                modelo.setAniosPronostico(cantidadAños);
+            } catch(NumberFormatException e){
+                modelo.setAniosPronostico(2);
+                JOptionPane.showMessageDialog(null, "Recuerda escribir un numero en el campo de cantidad de años a pronosticar para ver el pronostico");
+            }
     }
     
     
@@ -126,7 +145,15 @@ public class VentanaPrincipalControlador {
     ActionListener oyenteAgregar = new ActionListener(){
         @Override
         public void actionPerformed(ActionEvent evt) {
+            actualizarCantidadDeAños();
+            try{
             modelo.agregarAnio(Double.parseDouble(vista.getCantidadVentas()));
+            } catch (NumberFormatException e){
+                JOptionPane.showMessageDialog(null, 
+                        "Debe escribir un numero en el campo de Cantidad de venta",
+                        "Error",
+                        JOptionPane.ERROR_MESSAGE);
+            }
             recargarTodo();
         }
         
@@ -237,6 +264,35 @@ public class VentanaPrincipalControlador {
             if(flechaPresionada){
                 evt.consume();
             }
+        }
+
+        @Override
+        public void keyReleased(KeyEvent evt) { 
+        }
+    };
+    
+    KeyListener keyguardVenta = new KeyListener(){
+        @Override
+        public void keyTyped(KeyEvent evt) { 
+            
+            int tecla = evt.getKeyChar();
+            char caracter = evt.getKeyChar();
+            int punto = 46;
+            boolean esNumero = tecla == punto || tecla == 8 || tecla >= 48 && tecla <= 57;
+            boolean esBackspace = caracter == 8;
+            boolean campoCantidadEstaVacio = false;
+            
+            // Configurar valor de campo vacio
+            if (esBackspace) {
+                campoCantidadEstaVacio = vista.getCantidadAños().length() == 0;   
+            }
+            // Verificacion de tecla presionada
+            if(!esNumero)
+                evt.consume();
+        }
+
+        @Override
+        public void keyPressed(KeyEvent evt) {
         }
 
         @Override

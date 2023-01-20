@@ -40,6 +40,7 @@ public class VentanaPrincipalModelo {
     
     public void setAniosPronostico(int anio){
         n = anio;
+        calcularTodo();
     }
     
     
@@ -56,6 +57,7 @@ public class VentanaPrincipalModelo {
                 break;
             }
         }
+        calcularTodo();
     }
     
     public void eliminarAnio(){
@@ -70,6 +72,7 @@ public class VentanaPrincipalModelo {
         for (int i = selectedAnio - 1; i < (misVentas.size()); i++) {
             misVentas.get(i).setX(misVentas.get(i).getX() - 1);
         }
+        calcularTodo();
         
     }
     
