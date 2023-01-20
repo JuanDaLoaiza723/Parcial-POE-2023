@@ -162,8 +162,17 @@ public class VentanaPrincipalControlador {
     ActionListener oyenteModificar = new ActionListener(){
         @Override
         public void actionPerformed(ActionEvent evt) {
-            //int cantidadVentas = Integer.parseInt(vista.getCantidadVentas());
-            //modelo.modificarAnio(cantidadVentas);
+            int cantidadVentas = 0;
+            try{
+            cantidadVentas = Integer.parseInt(vista.getCantidadVentas());
+            } catch (NumberFormatException e){
+                JOptionPane.showMessageDialog(null, 
+                        "Debe escribir un numero en el campo de Cantidad de venta",
+                        "Error",
+                        JOptionPane.ERROR_MESSAGE);
+            }
+            modelo.modificarAnio(cantidadVentas);
+            recargarTodo();
         }
     };
     
@@ -202,12 +211,12 @@ public class VentanaPrincipalControlador {
                 selectedAnio = Integer.parseInt(table.getValueAt(table.getSelectedRow(), 0).toString());
                 modelo.setSelectedAnio(selectedAnio);
             } catch (NumberFormatException e) {
-                
             }
 
             if (Mouse_evt.getClickCount() == 1) {
-                
             }
+            String cantidadVentas = Double.toString(modelo.getCantidadVentasAnio(selectedAnio));
+            vista.setCantidadVentas(cantidadVentas);
         }
 
         @Override

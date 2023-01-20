@@ -157,7 +157,18 @@ public class VentanaPrincipalModelo {
         return sumatoriaXY;
     }
     
-    
+    // AUXILIARES
+    public double getCantidadVentasAnio(int anio){
+        double cantidad = 0;
+        
+        for(Venta ventaActual: misVentas){
+            if(ventaActual.getX() == anio){
+                cantidad = ventaActual.getY();
+            }
+        }
+        
+        return cantidad;
+    }
     
     //              CALCULOS DE ARRAY COMPLETO              //
     // CALCULOS ATAJO
