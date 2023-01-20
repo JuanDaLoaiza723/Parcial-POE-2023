@@ -78,6 +78,11 @@ public class VentanaPrincipalVista extends javax.swing.JFrame {
         table_pronosticoVentas = new javax.swing.JTable();
         lbl_año = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
+        txtF_x = new javax.swing.JTextField();
+        txtF_y = new javax.swing.JTextField();
+        txtF_x2 = new javax.swing.JTextField();
+        txtF_y2 = new javax.swing.JTextField();
+        txtF_xy = new javax.swing.JTextField();
 
         jTable2.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -93,12 +98,11 @@ public class VentanaPrincipalVista extends javax.swing.JFrame {
         jScrollPane2.setViewportView(jTable2);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(1150, 550));
         setResizable(false);
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setMinimumSize(new java.awt.Dimension(500, 560));
-        jPanel1.setPreferredSize(new java.awt.Dimension(500, 560));
+        jPanel1.setPreferredSize(new java.awt.Dimension(500, 500));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         lbl_titulo.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
@@ -192,6 +196,21 @@ public class VentanaPrincipalVista extends javax.swing.JFrame {
         jLabel1.setText("Cantidad ventas");
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(135, 290, -1, -1));
 
+        txtF_x.setEditable(false);
+        jPanel1.add(txtF_x, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 510, 93, -1));
+
+        txtF_y.setEditable(false);
+        jPanel1.add(txtF_y, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 510, 93, -1));
+
+        txtF_x2.setEditable(false);
+        jPanel1.add(txtF_x2, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 510, 93, -1));
+
+        txtF_y2.setEditable(false);
+        jPanel1.add(txtF_y2, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 510, 93, -1));
+
+        txtF_xy.setEditable(false);
+        jPanel1.add(txtF_xy, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 510, 93, -1));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -200,7 +219,7 @@ public class VentanaPrincipalVista extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 560, Short.MAX_VALUE)
         );
 
         pack();
@@ -288,6 +307,86 @@ public class VentanaPrincipalVista extends javax.swing.JFrame {
      */
     public String getCrecimientoPromedio(){
         return txtF_crecimientoPromedio.getText();
+    }
+    
+    /**
+     * Asigna un texto al txtF_x
+     * @param texto El texto que se asignara al campo (String)
+     */
+    public void setXVenta(String texto){
+        txtF_x.setText(texto);
+    }
+    
+    /**
+     * Obtiene el crecimiento promedio del campo de texto
+     * @return La x (int)
+     */
+    public String getXVenta(){
+        return txtF_x.getText();
+    }
+    
+    /**
+     * Asigna un texto al txtF_y
+     * @param texto El texto que se asignara al campo (String)
+     */
+    public void setYVenta(String texto){
+        txtF_y.setText(texto);
+    }
+    
+    /**
+     * Obtiene el crecimiento promedio del campo de texto
+     * @return La y (int)
+     */
+    public String getYVenta(){
+        return txtF_y.getText();
+    }
+    
+    /**
+     * Asigna un texto al txtF_x2
+     * @param texto El texto que se asignara al campo (String)
+     */
+    public void setX2Venta(String texto){
+        txtF_x2.setText(texto);
+    }
+    
+    /**
+     * Obtiene el crecimiento promedio del campo de texto
+     * @return La x^2 (int)
+     */
+    public String getX2Venta(){
+        return txtF_x2.getText();
+    }
+    
+    /**
+     * Asigna un texto al txtF_y2
+     * @param texto El texto que se asignara al campo (String)
+     */
+    public void setY2Venta(String texto){
+        txtF_y2.setText(texto);
+    }
+    
+    /**
+     * Obtiene el crecimiento promedio del campo de texto
+     * @return La y^2 (int)
+     */
+    public String getY2Venta(){
+        return txtF_y2.getText();
+    }
+    
+    /**
+     * Asigna un texto al txtF_xy
+     * @param texto El texto que se asignara al campo (String)
+     */
+    public void setXYVenta(String texto){
+        txtF_xy.setText(texto);
+    }
+    
+    /**
+     * Obtiene el crecimiento promedio del campo de texto
+     * @return La x*y (int)
+     */
+    public String getXYVenta(){
+        return txtF_xy.getText();
     }
     
     /**
@@ -509,6 +608,11 @@ public class VentanaPrincipalVista extends javax.swing.JFrame {
     private javax.swing.JTextField txtF_cantidadAños;
     private javax.swing.JTextField txtF_cantidadVentas;
     private javax.swing.JTextField txtF_crecimientoPromedio;
+    private javax.swing.JTextField txtF_x;
+    private javax.swing.JTextField txtF_x2;
+    private javax.swing.JTextField txtF_xy;
+    private javax.swing.JTextField txtF_y;
+    private javax.swing.JTextField txtF_y2;
     // End of variables declaration//GEN-END:variables
 
 }
