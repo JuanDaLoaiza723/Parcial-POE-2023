@@ -43,6 +43,7 @@ public class VentanaPrincipalModelo {
     //              AGREGAR, MODIFICAR Y ELIMINAR               //
     public void agregarAnio(double cantidadVentas){
         misVentas.add(new Venta(misVentas.size()+1, cantidadVentas));
+        calcularTodo();
     }
     
     public void modificarAnio(double cantidadVentas){

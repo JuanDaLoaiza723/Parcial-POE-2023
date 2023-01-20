@@ -22,6 +22,8 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
+import java.lang.NumberFormatException;
+import java.util.ConcurrentModificationException;
 
 public class VentanaPrincipalControlador {
     
@@ -41,13 +43,17 @@ public class VentanaPrincipalControlador {
         vista.setLocationRelativeTo(null);
         vista.setResizable(false);
         
-        
+        vista.addActionAgregarAño(oyenteAgregar);
+        vista.addModificarAño(oyenteModificar);
+        vista.addActionBorrarAño(oyenteEliminar);
+        vista.addActionNuevoPronostico(oyenteNuevoPronostico);
+        vista.addActionTable1(oyenteFila);
         
     }
     
     public void cargarTabla(){
         
-//        vista.limpiarTabla();
+        vista.limpiarTabla1();
         
         for(int i = 0; i < modelo.getCantidadMisVentas(); i++){
             int x = modelo.getMiX(i);
@@ -56,14 +62,14 @@ public class VentanaPrincipalControlador {
             double y2 = modelo.getMiY2(i);
             double xy = modelo.getMiXY(i);
             
-//            vista.nuevaFila(x, y, x2, y2, xy);
+            vista.nuevaFilaVentas(x, y, x2, y2, xy);
         }
     }
         
     
     public void recargarTodo(){
         cargarTabla();
-//        vista.limpiarCampos();
+        vista.limpiarCampos();
     }
     
     
@@ -71,8 +77,12 @@ public class VentanaPrincipalControlador {
     //              LISTENERS               //
     ActionListener oyenteAgregar = new ActionListener(){
         @Override
-        public void actionPerformed(ActionEvent e) {
-            //modelo.agregarAnio(vista.getCantidadVetnas()
+        public void actionPerformed(ActionEvent evt) {
+            
+            
+            modelo.agregarAnio(Double.parseDouble(vista.getCantidadVentas()));
+            recargarTodo();
+            
         }
         
     };
@@ -80,11 +90,10 @@ public class VentanaPrincipalControlador {
     
     ActionListener oyenteModificar = new ActionListener(){
         @Override
-        public void actionPerformed(ActionEvent e) {
-//            int cantidadVentas = vista.getCantidadVentas();
-//            modelo.modificarAnio(cantidadVentas);
+        public void actionPerformed(ActionEvent evt) {
+            //int cantidadVentas = Integer.parseInt(vista.getCantidadVentas());
+            //modelo.modificarAnio(cantidadVentas);
         }
-        
     };
     
     /**
@@ -95,7 +104,6 @@ public class VentanaPrincipalControlador {
         public void actionPerformed(ActionEvent e) {
             modelo.eliminarAnio();
         }
-        
     };
     
     /**

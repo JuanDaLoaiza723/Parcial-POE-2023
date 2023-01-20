@@ -313,7 +313,7 @@ public class VentanaPrincipalVista extends javax.swing.JFrame {
      * @param y La cantidad de ventas (String)
      * 
      */
-    public void nuevaFilaVentas(int x, int y, int x2, int y2,int xy) {
+    public void nuevaFilaVentas(int x, double y, int x2, double y2,double xy) {
         modeloTabla1.addRow(new Object[]{
             x, y, x2, y2, xy
         });
