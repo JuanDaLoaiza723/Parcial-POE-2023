@@ -16,7 +16,6 @@ package Modelo;
 public class VentanaPrincipalModelo {
     
     java.util.List<Venta> misVentas = new java.util.ArrayList<>();
-    java.util.List<Venta> ventasPronosticadas = new java.util.ArrayList<>();
     
     int selectedAnio = -1;
     
@@ -37,6 +36,10 @@ public class VentanaPrincipalModelo {
     //              SISTEMA                //
     public void setSelectedAnio(int anio){
         selectedAnio = anio;
+    }
+    
+    public void setAniosPronostico(int anio){
+        n = anio;
     }
     
     
@@ -64,9 +67,10 @@ public class VentanaPrincipalModelo {
             }
         }
         
-        for (int i = selectedAnio - 1; i < misVentas.size() - selectedAnio; i++) {
+        for (int i = selectedAnio - 1; i < (misVentas.size()); i++) {
             misVentas.get(i).setX(misVentas.get(i).getX() - 1);
         }
+        
     }
     
     public void eliminarTodo(){
@@ -117,6 +121,39 @@ public class VentanaPrincipalModelo {
     }
     
     // PRONOSTICADAS
+    public double getA(){
+        return a;
+    }
+    
+    public double getB(){
+        return b;
+    }
+    
+    public double getC(){
+        return c;
+    }
+    
+    // SUMATORIAS
+    public int getSumatoriaX() {
+        return sumatoriaX;
+    }
+
+    public double getSumatoriaY() {
+        return sumatoriaY;
+    }
+
+    public int getSumatoriaX2() {
+        return sumatoriaX2;
+    }
+
+    public double getSumatoriaY2() {
+        return sumatoriaY2;
+    }
+
+    public double getSumatoriaXY() {
+        return sumatoriaXY;
+    }
+    
     
     
     //              CALCULOS DE ARRAY COMPLETO              //
@@ -216,6 +253,6 @@ public class VentanaPrincipalModelo {
         double numerador = b*n;
         double denominador = sumatoriaY;
         
-        c = Math.round(numerador/denominador * 100.0) / 100.0;
+        c = Math.round(numerador/denominador * 1000.0) / 1000.0;
     }
 }

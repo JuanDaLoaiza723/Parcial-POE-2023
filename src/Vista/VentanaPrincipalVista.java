@@ -326,7 +326,7 @@ public class VentanaPrincipalVista extends javax.swing.JFrame {
      * 
      */
     public void nuevaFilaPronostico(int año, int pronostico) {
-        modeloTabla1.addRow(new Object[]{
+        modeloTabla2.addRow(new Object[]{
             año, pronostico
         });
     }
@@ -368,7 +368,6 @@ public class VentanaPrincipalVista extends javax.swing.JFrame {
      */
     public void limpiarCampos() {
         txtF_cantidadVentas.setText("");
-        txtF_cantidadAños.setText("");
     }
     
     //              HABILITAR/DESHABILITAR BOTONES          //
@@ -479,6 +478,10 @@ public class VentanaPrincipalVista extends javax.swing.JFrame {
      */
     public void addActionTable2(MouseListener listener) {
         table_pronosticoVentas.addMouseListener(listener);
+    }
+    
+    public void addActionAñosPronostico(KeyListener listener){
+      txtF_cantidadAños.addKeyListener(listener);
     }
     
     
