@@ -6,7 +6,7 @@ package Controlador;
  *
  *    Archivo:  VentanaPrincipalControlador.java
  *    Licencia: GNU-GPL 
- *    @version  1.0
+ *    @version  1.1
  *    
  *    @author   Alejandro Guerrero Cano           (202179652-3743) {@literal <"alejandro.cano@correounivalle.edu.co">}
  *    @author   Juan David Loaiza Santiago        (202177570-3743) {@literal <"juan.loaiza.santiago@correounivalle.edu.co">}
@@ -23,7 +23,6 @@ import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import javax.swing.JTable;
-import java.lang.NumberFormatException;
 import javax.swing.JOptionPane;
 
 public class VentanaPrincipalControlador {
@@ -35,6 +34,11 @@ public class VentanaPrincipalControlador {
     VentanaPrincipalModelo modelo = new VentanaPrincipalModelo();
     VentanaPrincipalVista vista = new VentanaPrincipalVista();
 
+    /**
+     * Constructor de VentanaPrincipalControlador
+     * @param modelo El modelo (VentanaPrincipalModelo)
+     * @param vista La vista (VentanaPrincipalVista)
+     */
     public VentanaPrincipalControlador(VentanaPrincipalModelo modelo, VentanaPrincipalVista vista) {
         
         this.modelo = modelo;
@@ -142,6 +146,9 @@ public class VentanaPrincipalControlador {
     
     
     //              LISTENERS               //
+    /**
+     * Agrega un nuevo registro estableciendo un año automaticamente y la cantidad de ventas en la vista
+     */
     ActionListener oyenteAgregar = new ActionListener(){
         @Override
         public void actionPerformed(ActionEvent evt) {
@@ -159,6 +166,9 @@ public class VentanaPrincipalControlador {
         
     };
     
+    /**
+     * Modifica la cantidad de ventas de un año
+     */
     ActionListener oyenteModificar = new ActionListener(){
         @Override
         public void actionPerformed(ActionEvent evt) {
@@ -188,7 +198,7 @@ public class VentanaPrincipalControlador {
     };
     
     /**
-     * Solo eliminar todo
+     * Elimina todas las ventas registradas para empezar de cero
      */
     ActionListener oyenteNuevoPronostico = new ActionListener(){
         @Override
@@ -199,6 +209,9 @@ public class VentanaPrincipalControlador {
         
     };
     
+    /**
+     * Se encarga de cambiar el numero de fila seleccionada
+     */
     MouseListener oyenteFila = new MouseListener() {
         @Override
         public void mousePressed(MouseEvent Mouse_evt) {
@@ -236,6 +249,9 @@ public class VentanaPrincipalControlador {
         }
     };
     
+    /**
+     * Verifica que los datos del campo de Años sean validos para evitar algunas excepciones
+     */
     KeyListener keyguardPronostico = new KeyListener(){
         @Override
         public void keyTyped(KeyEvent evt) { 
@@ -280,6 +296,9 @@ public class VentanaPrincipalControlador {
         }
     };
     
+    /**
+     * Verifica que los datos del campo de Cantidad de Ventas sean validos para evitar algunas excepciones
+     */
     KeyListener keyguardVenta = new KeyListener(){
         @Override
         public void keyTyped(KeyEvent evt) { 
